@@ -1,0 +1,12 @@
+{
+  "name": "simple-chat",
+  "version": "1.0.0",
+  "description": "Simple Chat Application using REST API and Websocket",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "npm run test"
+  },
+  "author": "marudits",
+  "license": "ISC"
+}
