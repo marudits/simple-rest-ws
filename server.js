@@ -24,6 +24,7 @@ router.get('/', (req, res) => {
 })
 
 // API
+// Postman collection : https://www.getpostman.com/collections/5e762adabbde73dc3bbe
 router.get('/status', (req, res) => {
     res.status(200).send(JSON.stringify({ successful: true, payload: { message: 'Server is running'} }));
 });
