@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <head>
+        <script language="JavaScript">
+
+            function connectToWebsocket(){
+                let ws = new WebSocket((window.location.protocol == 'https:' ? 'wss://' : 'ws://') + window.location.host);
+                
+                ws.onmessage = function (message) {
+                    let content = JSON.parse(message.data).map(x => return `<li><b>${x.message}</b> - <em>${new Date(x.created_at).toLocaleString()}</em></li>`)
+                    document.getElementById('ws-message-list').innerHTML = `<ul>${content}</ul>`;
+                };
+            }
+
+            function sendMessage(){
+                let ws = new WebSocket((window.location.protocol == 'https:' ? 'wss://' : 'ws://') + window.location.host);
+                let input = document.getElementById('ws-message-input').value;
+                
+                ws.onopen = function () {
+                    if(input && input.trim().length > 0){
+                        ws.send(input);
+                    }
+                };
+
+                connectToWebsocket();
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>Hello World!</h1>
+        </header>
+        <main>
+            <p>This is static page served from Express for testing WebSocket</p>
+            <div>
+                <button onclick="connectToWebsocket()">Connect to Websocket server</button>
+            </div>
+            <div>
+                <input type="text" id="ws-message-input"/>
+                <button onclick="sendMessage()">Send Message</button>
+            </div>
+            <div id="ws-message-list">
+
+            </div>
+        </main>
+        <footer>
+            Copyright &copy; 2019 by marudits
+        </footer>
+    </body>
+</html>
